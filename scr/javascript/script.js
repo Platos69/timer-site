@@ -25,10 +25,10 @@ const toggleTimer = () => {
             setTimer(timer);
         }, 10);
         button.setAttribute('action', 'pause')
-        button.innerHTML = '<i class="fa-solid fa-pause"></i>'
+        button.innerHTML = '<i class="fa-solid fa-pause"></i>';
     } else if (action == 'pause') {
         button.setAttribute('action', 'continue')
-        button.innerHTML = '<i class="fa-solid fa-play"></i>'
+        button.innerHTML = '<i class="fa-solid fa-play"></i>';
     }
 }
 
@@ -42,9 +42,21 @@ const markTime = (time) => {
     addMarkToList(marks.length, timer);
 }
 
+const resetTimer = () => {
+    clearInterval(intervalId);
+    timer = 0;
+    marks = [];
+    setTimer(timer);
+    marksList.innerHTML = '';
+    const button = document.getElementById('power');
+    const action = button.getAttribute('action', 'start');
+    button.innerHTML = '<i class="fa-solid fa-play"></i>';
+}
+
 const setTimer = (time) => {
     timerEl.innerText = formatTime(time);
 }
 
 document.getElementById('power').addEventListener('click', toggleTimer);
 document.getElementById('mark').addEventListener('click', markTime);
+document.getElementById('reset').addEventListener('click', resetTimer);
